@@ -24,10 +24,23 @@ h1 {
   width: 600px;
   height: 600px;
   display: grid;
-  grid-template-columns: repeat(32, 1fr);
-  grid-template-rows: repeat(32, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   box-sizing: border-box;
 }
 #sketch div {
-  border: solid rgb(192, 189, 189) 1px;
+  border: solid rgb(185, 184, 184) 1px;
+}
+
+footer {
+  text-align: center;
+}
+footer #slider {
+  width: 15rem;
+  margin-top: 4rem;
+}
+footer #grid-pick-text {
+  margin: 0;
+  color: white;
+  font-size: 16px;
 }/*# sourceMappingURL=style.css.map */
