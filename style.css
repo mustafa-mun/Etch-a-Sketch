@@ -1,0 +1,33 @@
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #283048; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1 {
+  color: white;
+  font-size: 2.5rem;
+} /*# sourceMappingURL=style.css.map */
+#sketch {
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  width: 600px;
+  height: 600px;
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  box-sizing: border-box;
+}
+#sketch div {
+  border: solid rgb(192, 189, 189) 1px;
+}/*# sourceMappingURL=style.css.map */
