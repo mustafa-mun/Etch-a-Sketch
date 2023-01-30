@@ -3,13 +3,15 @@ const slider = document.getElementById('slider');
 const gridText = document.getElementById('grid-pick-text');
 const eraser = document.getElementById('eraser');
 const colorPicker = document.getElementById('colorpicker')
-
+const rainbowMode = document.getElementById('rainbow-mode');
 
 // Change example variable based on users range slider value
 
 
 reflectGrid(16) // Default value
 let penColor = 'black' // Default value 
+let rainbowModeOpen = false
+let eraserModeOPen = false
 
 slider.oninput = function () { // Grid picker text update
   gridText.textContent = `${this.value}x${this.value}`
@@ -17,20 +19,26 @@ slider.oninput = function () { // Grid picker text update
 
 slider.addEventListener('mouseup' , () => { // Change grid then update the grid
   sketch.innerHTML = ''
-  reflectGrid(slider.value)
+  penColor = 'black';
+  reflectGrid(slider.value);
 })
 
 
 colorPicker.addEventListener("change", (event) => { // Pick pen color with color picker
   penColor = event.target.value
+  rainbowModeOpen = false
 });
 
 
 eraser.addEventListener('click', () => { 
+  eraserModeOPen = true
   penColor = 'white'
-  div.style.border = 'solid black 1px'
 })
 
+rainbowMode.addEventListener('click', () => {
+  rainbowModeOpen = true
+  eraserModeOPen = false
+})
 
 
 function reflectGrid(value) {
@@ -39,8 +47,14 @@ function reflectGrid(value) {
     sketch.appendChild(div)
   
     div.addEventListener('mouseover', () => {
-      div.style.backgroundColor = penColor
+      if(rainbowModeOpen && !eraserModeOPen) {
+        div.style.backgroundColor = randomRgbGenerate()
+      } else {
+        div.style.backgroundColor = penColor
+      }
     })
+
+
   }
 
   sketch.style.gridTemplateColumns = `repeat(${value}, 1fr)`
@@ -48,3 +62,8 @@ function reflectGrid(value) {
 } 
 
 
+function randomRgbGenerate() {
+  return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+}
+
+console.log(randomRgbGenerate());
