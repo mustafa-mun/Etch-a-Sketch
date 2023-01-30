@@ -16,6 +16,7 @@ body {
 h1 {
   color: white;
   font-size: 2.5rem;
+  margin: 1rem;
 }/*# sourceMappingURL=style.css.map */
 
 
@@ -25,16 +26,44 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: row-reverse;
+
+  .setting-btn {
+
+    background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
+    text-align: center;
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;      
+    box-shadow: 0 0 20px #eee;
+    display: block;
+    margin-left: 3rem;
+    margin-right: 1rem;
+    font-size: 15px;
+    border-radius: 999px;
+    width: 7rem;
+    height: 7rem;
+    font-weight: bold;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .setting-btn:hover {
+  
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
   
   #sketch {
 
   background-color: white;
-  width: 600px;
-  height: 600px;
+  width: 650px;
+  height: 650px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  margin-right: 11rem;
 
   div {
     border: solid rgb(228, 226, 226) 1px;
@@ -82,6 +111,13 @@ main {
     cursor: pointer;
   }
 
+  #eraser:active,
+  #autmn-mode:active,
+  #winter-mode:active,
+  #rainbow-mode:active {
+   cursor: grab;
+  }
+
   #rainbow-mode {
 
     background-image: linear-gradient(to right, #FC354C 0%, #0ABFBC  51%, #FC354C  100%);
@@ -121,6 +157,8 @@ main {
     color: #fff;
     text-decoration: none;
   }
+
+  
 
   #autmn-mode {
 

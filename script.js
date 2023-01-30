@@ -6,9 +6,12 @@ const colorPicker = document.getElementById('colorpicker')
 const rainbowMode = document.getElementById('rainbow-mode');
 const autmnMode = document.getElementById('autmn-mode')
 const winterMode = document.getElementById('winter-mode')
+const refreshBtn = document.getElementById('refresh-btn');
+const borderSettingBtn = document.getElementById('border-setting-btn')
 
 
 
+let borders = true
 reflectGrid(16) // Default value
 let penColor = 'black' // Default value 
 let rainbowModeOpen = false;
@@ -17,22 +20,18 @@ let winterModeOpen = false;
 let eraserModeOPen = false;
 
 
-slider.oninput = function () { // Grid picker text update
-  gridSizeText.textContent = `${this.value}x${this.value}`
-}
+let startTime;
+let intervalId;
 
-slider.addEventListener('mouseup' , () => { // Change grid then update the grid
-  sketch.innerHTML = ''
-  penColor = 'black';
-  reflectGrid(slider.value);
-})
+
 
 
 colorPicker.addEventListener("change", (event) => { // Pick pen color with color picker
   penColor = event.target.value
   rainbowModeOpen = false
+  autmnModeOpen = false
+  winterModeOpen = false
 });
-
 
 eraser.addEventListener('click', () => { 
   eraserModeOPen = true
@@ -60,8 +59,14 @@ autmnMode.addEventListener('click', () => {
   winterModeOpen = false
 })
 
+slider.oninput = function () { // Grid picker text update
+  gridSizeText.textContent = `${this.value}x${this.value}`
+}
 
-
+slider.addEventListener('mouseup' , () => { // Change grid then update the grid
+  sketch.innerHTML = ''
+  reflectGrid(slider.value);
+})
 
 
 
@@ -69,25 +74,28 @@ function reflectGrid(value) {
   for(let i = 0 ; i < value*value ; i++) {
     const div = document.createElement('div')
     sketch.appendChild(div)
-  
-    div.addEventListener('mouseover', () => {
+   
+ 
+   div.addEventListener('mouseover', function(event) {
+    
       if(rainbowModeOpen && !eraserModeOPen) {
-        div.style.backgroundColor = randomRgbGenerate()
-      } else if(winterModeOpen && !eraserModeOPen) {
-        div.style.backgroundColor = randomWinterRgb()
-      } else if(autmnModeOpen && !eraserModeOPen) {
-        div.style.backgroundColor = randomAutmnRgb()
-      } else {
-        div.style.backgroundColor = penColor
-      }
-    })
+          div.style.backgroundColor = randomRgbGenerate()
+        } else if(winterModeOpen  && !eraserModeOPen ) {
+          div.style.backgroundColor = randomWinterRgb()
+        } else if(autmnModeOpen  && !eraserModeOPen ) {
+          div.style.backgroundColor = randomAutmnRgb()
+        } else {
+          div.style.backgroundColor = penColor
+        }
+  
+  });
 
   }
+  
 
   sketch.style.gridTemplateColumns = `repeat(${value}, 1fr)`
   sketch.style.gridTemplateRows = `repeat(${value}, 1fr)`
 } 
-
 
 function randomAutmnRgb() {
   const R = Math.floor(Math.random() * (255 - 128 + 1) + 128);
@@ -95,12 +103,14 @@ function randomAutmnRgb() {
   const B = 0;
   return `rgb(${R}, ${G}, ${B})`
 }
+
 function randomWinterRgb() {
   const R = Math.floor(Math.random() * 129);
   const G = Math.floor(Math.random() * 256);
   const B = 255;
   return `rgb(${R}, ${G}, ${B})`
 }
+
 function randomRgbGenerate() {
   const R = Math.floor(Math.random() * 256);
   const G = Math.floor(Math.random() * 256);
@@ -108,3 +118,32 @@ function randomRgbGenerate() {
   return `rgb(${R}, ${G}, ${B})`
 }
 
+function refresh() {
+  sketch.innerHTML = ''
+  reflectGrid(16) // Default value
+  penColor = 'black' // Default value 
+  rainbowModeOpen = false;
+  autmnModeOpen = false;
+  winterModeOpen = false;
+  eraserModeOPen = false;
+  slider.value = 16;
+  gridSizeText.textContent = '16x16'
+}
+
+let borderOn = true;
+
+
+function borderSwitch() {
+  const divs = sketch.querySelectorAll('div')
+  divs.forEach(item => {
+    if(borderOn) {
+      item.style.border = 'none'
+      borderSettingBtn.textContent = 'BORDERS/ ON'
+    } else {
+      item.style.border = 'solid rgb(228, 226, 226) 1px'
+      borderSettingBtn.textContent = 'BORDERS/ OFF'
+    }
+  })
+  if(borderOn) borderOn = false
+  else {borderOn = true}
+}
