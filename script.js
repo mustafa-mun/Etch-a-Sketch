@@ -10,8 +10,7 @@ const refreshBtn = document.getElementById('refresh-btn');
 const borderSettingBtn = document.getElementById('border-setting-btn')
 
 
-
-let borders = true
+let borderOn = true;
 reflectGrid(16) // Default value
 let penColor = 'black' // Default value 
 let rainbowModeOpen = false;
@@ -65,30 +64,73 @@ slider.oninput = function () { // Grid picker text update
 
 slider.addEventListener('mouseup' , () => { // Change grid then update the grid
   sketch.innerHTML = ''
+  borderOn = true
+  borderSettingBtn.textContent = 'BORDERS/ OFF'
   reflectGrid(slider.value);
 })
 
+
+let isDragging = false;
 
 
 function reflectGrid(value) {
   for(let i = 0 ; i < value*value ; i++) {
     const div = document.createElement('div')
     sketch.appendChild(div)
+
+    div.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+
+    div.addEventListener('mousedown', event => {
+      isDragging = true;
+      if(rainbowModeOpen && !eraserModeOPen) {
+                event.target.style.backgroundColor = randomRgbGenerate()
+              } else if(winterModeOpen  && !eraserModeOPen ) {
+                event.target.style.backgroundColor = randomWinterRgb()
+              } else if(autmnModeOpen  && !eraserModeOPen ) {
+                event.target.style.backgroundColor = randomAutmnRgb()
+              } else {
+                event.target.style.backgroundColor = penColor
+              }
+      
+    });
+
+  
+  
+    div.addEventListener('mousemove', event => {
+      if (isDragging) {
+        if( rainbowModeOpen && !eraserModeOPen) {
+          event.target.style.backgroundColor = randomRgbGenerate()
+        } else if(winterModeOpen  && !eraserModeOPen ) {
+          event.target.style.backgroundColor = randomWinterRgb()
+        } else if(autmnModeOpen  && !eraserModeOPen ) {
+          event.target.style.backgroundColor = randomAutmnRgb()
+        } else {
+          event.target.style.backgroundColor = penColor
+        }
+      }
+    });
+  
+   
+
+    
    
  
-   div.addEventListener('mouseover', function(event) {
+  //  div.addEventListener('mouseover', function(event) {
     
-      if(rainbowModeOpen && !eraserModeOPen) {
-          div.style.backgroundColor = randomRgbGenerate()
-        } else if(winterModeOpen  && !eraserModeOPen ) {
-          div.style.backgroundColor = randomWinterRgb()
-        } else if(autmnModeOpen  && !eraserModeOPen ) {
-          div.style.backgroundColor = randomAutmnRgb()
-        } else {
-          div.style.backgroundColor = penColor
-        }
+  //     if(rainbowModeOpen && !eraserModeOPen) {
+  //         div.style.backgroundColor = randomRgbGenerate()
+  //       } else if(winterModeOpen  && !eraserModeOPen ) {
+  //         div.style.backgroundColor = randomWinterRgb()
+  //       } else if(autmnModeOpen  && !eraserModeOPen ) {
+  //         div.style.backgroundColor = randomAutmnRgb()
+  //       } else {
+  //         div.style.backgroundColor = penColor
+  //       }
   
-  });
+  // });
 
   }
   
@@ -130,7 +172,7 @@ function refresh() {
   gridSizeText.textContent = '16x16'
 }
 
-let borderOn = true;
+
 
 
 function borderSwitch() {
