@@ -17,19 +17,26 @@
   </h1>
 
  
-  <section>
-    <input type="color" id="colorpicker" >
-    <button id="eraser">ERASER</button>
-    <button id="rainbow-mode">RAINBOW</button>
-  </section>
+  
 
-  <main id="sketch">
-
+  <main>
+    <section id="sketch"></section>
+    <section class="color-changer-section">
+      <div>
+        <h4 class="pick-color-text">Pick Color</h4>
+        <input type="color" id="colorpicker" >
+      </div>
+      <button id="eraser">ERASER</button>
+      <button id="rainbow-mode">RAINBOW MODE</button>
+      <button id="autmn-mode">AUTMN MODE</button>
+      <button id="winter-mode">WINTER MODE</button>
+    </section>
   </main>
 
   <footer>
+    <h4 class="pick-grid-text">Pick Grid Size</h4>
     <input type="range" name="grid-slider" id="slider" value="16" min="2" max="100">
-    <p id="grid-pick-text">16x16</p>
+    <p id="grid-size-text">16x16</p>
   </footer>
   
 

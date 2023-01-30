@@ -17,19 +17,119 @@ h1 {
   color: white;
   font-size: 2.5rem;
 } /*# sourceMappingURL=style.css.map */
-#sketch {
-  padding: 0;
-  margin: 0;
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+main #sketch {
   background-color: white;
   width: 600px;
   height: 600px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  box-sizing: border-box;
+  margin-right: 11rem;
 }
-#sketch div {
-  border: solid rgb(185, 184, 184) 1px;
+main #sketch div {
+  border: solid rgb(228, 226, 226) 1px;
+}
+main .color-changer-section {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+  gap: 3rem;
+  margin-right: 3rem;
+}
+main .color-changer-section div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .color-changer-section .pick-color-text {
+  margin-bottom: 1rem;
+  font-size: 22px;
+}
+main .color-changer-section #colorpicker {
+  cursor: pointer;
+}
+main .color-changer-section #eraser,
+main .color-changer-section #autmn-mode,
+main .color-changer-section #winter-mode,
+main .color-changer-section #rainbow-mode {
+  width: 8rem;
+  height: 3rem;
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+main .color-changer-section #rainbow-mode {
+  background-image: linear-gradient(to right, #FC354C 0%, #0ABFBC 51%, #FC354C 100%);
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+}
+main .color-changer-section #rainbow-mode:hover {
+  background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+  -webkit-animation: slidebg 5s linear infinite;
+          animation: slidebg 5s linear infinite;
+}
+main .color-changer-section #eraser {
+  background-image: linear-gradient(to right, #304352 0%, #d7d2cc 51%, #304352 100%);
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+}
+main .color-changer-section #eraser:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+main .color-changer-section #autmn-mode {
+  background-image: linear-gradient(to right, #FF4E50 0%, #F9D423 51%, #FF4E50 100%);
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+}
+main .color-changer-section #autmn-mode:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+main .color-changer-section #winter-mode {
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+}
+main .color-changer-section #winter-mode:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
 
 footer {
@@ -37,10 +137,28 @@ footer {
 }
 footer #slider {
   width: 15rem;
-  margin-top: 4rem;
 }
-footer #grid-pick-text {
+footer #grid-size-text {
   margin: 0;
   color: white;
   font-size: 16px;
+}
+footer .pick-grid-text {
+  margin: 0;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  font-size: 19px;
+}
+
+@-webkit-keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
+}
+
+@keyframes slidebg {
+  to {
+    background-position: 20vw;
+  }
 }/*# sourceMappingURL=style.css.map */

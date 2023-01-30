@@ -1,20 +1,24 @@
 const sketch = document.getElementById('sketch');
 const slider = document.getElementById('slider');
-const gridText = document.getElementById('grid-pick-text');
+const gridSizeText = document.getElementById('grid-size-text');
 const eraser = document.getElementById('eraser');
 const colorPicker = document.getElementById('colorpicker')
 const rainbowMode = document.getElementById('rainbow-mode');
+const autmnMode = document.getElementById('autmn-mode')
+const winterMode = document.getElementById('winter-mode')
 
-// Change example variable based on users range slider value
 
 
 reflectGrid(16) // Default value
 let penColor = 'black' // Default value 
-let rainbowModeOpen = false
-let eraserModeOPen = false
+let rainbowModeOpen = false;
+let autmnModeOpen = false;
+let winterModeOpen = false;
+let eraserModeOPen = false;
+
 
 slider.oninput = function () { // Grid picker text update
-  gridText.textContent = `${this.value}x${this.value}`
+  gridSizeText.textContent = `${this.value}x${this.value}`
 }
 
 slider.addEventListener('mouseup' , () => { // Change grid then update the grid
@@ -38,7 +42,27 @@ eraser.addEventListener('click', () => {
 rainbowMode.addEventListener('click', () => {
   rainbowModeOpen = true
   eraserModeOPen = false
+  autmnModeOpen = false
+  winterModeOpen = false
 })
+
+winterMode.addEventListener('click', () => {
+  winterModeOpen = true
+  eraserModeOPen = false
+  rainbowModeOpen = false
+  autmnModeOpen = false
+})
+
+autmnMode.addEventListener('click', () => {
+  autmnModeOpen = true
+  eraserModeOPen = false
+  rainbowModeOpen = false
+  winterModeOpen = false
+})
+
+
+
+
 
 
 function reflectGrid(value) {
@@ -49,11 +73,14 @@ function reflectGrid(value) {
     div.addEventListener('mouseover', () => {
       if(rainbowModeOpen && !eraserModeOPen) {
         div.style.backgroundColor = randomRgbGenerate()
+      } else if(winterModeOpen && !eraserModeOPen) {
+        div.style.backgroundColor = randomWinterRgb()
+      } else if(autmnModeOpen && !eraserModeOPen) {
+        div.style.backgroundColor = randomAutmnRgb()
       } else {
         div.style.backgroundColor = penColor
       }
     })
-
 
   }
 
@@ -62,8 +89,22 @@ function reflectGrid(value) {
 } 
 
 
+function randomAutmnRgb() {
+  const R = Math.floor(Math.random() * (255 - 128 + 1) + 128);
+  const G = Math.floor(Math.random() * 256);
+  const B = 0;
+  return `rgb(${R}, ${G}, ${B})`
+}
+function randomWinterRgb() {
+  const R = Math.floor(Math.random() * 129);
+  const G = Math.floor(Math.random() * 256);
+  const B = 255;
+  return `rgb(${R}, ${G}, ${B})`
+}
 function randomRgbGenerate() {
-  return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+  const R = Math.floor(Math.random() * 256);
+  const G = Math.floor(Math.random() * 256);
+  const B = Math.floor(Math.random() * 256);
+  return `rgb(${R}, ${G}, ${B})`
 }
 
-console.log(randomRgbGenerate());
