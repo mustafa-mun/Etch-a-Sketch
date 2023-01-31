@@ -6,7 +6,6 @@ const colorPicker = document.getElementById('colorpicker')
 const rainbowMode = document.getElementById('rainbow-mode');
 const autmnMode = document.getElementById('autmn-mode')
 const winterMode = document.getElementById('winter-mode')
-const refreshBtn = document.getElementById('refresh-btn');
 const borderSettingBtn = document.getElementById('border-setting-btn')
 
 
@@ -158,6 +157,21 @@ function borderSwitch() {
   else {borderOn = true}
 }
 
+
+function clearCanvas() {
+  sketch.innerHTML = ''
+  reflectGrid(slider.value)
+  const divs = sketch.querySelectorAll('div')
+  divs.forEach(item => {
+    if(!borderOn) {
+      item.style.border = 'none'
+      borderSettingBtn.textContent = 'BORDERS/ ON'
+    } else {
+      item.style.border = 'solid rgb(228, 226, 226) 1px'
+      borderSettingBtn.textContent = 'BORDERS/ OFF'
+    }
+  })
+}
 
 function refresh() {
   sketch.innerHTML = ''

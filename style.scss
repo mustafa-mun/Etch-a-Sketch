@@ -38,6 +38,7 @@ main {
     background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
     text-align: center;
     margin-bottom: 4rem;
+    margin-top: 4rem;
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;      
@@ -222,7 +223,8 @@ footer {
   #grid-size-text {
     margin: 0;
     color: white;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 17px;
   }
 
   .pick-grid-text {
