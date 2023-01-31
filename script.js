@@ -7,7 +7,7 @@ const rainbowMode = document.getElementById('rainbow-mode');
 const autmnMode = document.getElementById('autmn-mode')
 const winterMode = document.getElementById('winter-mode')
 const borderSettingBtn = document.getElementById('border-setting-btn')
-
+const penSwitchBtn = document.getElementById('pen-switch');
 
 
 let borderOn = true;
@@ -22,17 +22,6 @@ reflectGrid(16) // Default value
 let penColor = 'black' // Default value 
 
 
-document.addEventListener('mouseup', () => {
-  isDragging = false;
-});
-
-
-document.addEventListener('mousedown', () => {
-  isDragging = true;
-});
-
-
-
 colorPicker.addEventListener("change", (event) => { // Pick pen color with color picker
   penColor = event.target.value
   rainbowModeOpen = false
@@ -40,26 +29,26 @@ colorPicker.addEventListener("change", (event) => { // Pick pen color with color
   winterModeOpen = false
 });
 
-eraser.addEventListener('click', () => { 
+eraser.addEventListener('click', () => { // Eraser button event listener 
   eraserModeOPen = true
   penColor = 'white'
 })
 
-rainbowMode.addEventListener('click', () => {
+rainbowMode.addEventListener('click', () => { // Rainbow mode  button event listener 
   rainbowModeOpen = true
   eraserModeOPen = false
   autmnModeOpen = false
   winterModeOpen = false
 })
 
-winterMode.addEventListener('click', () => {
+winterMode.addEventListener('click', () => { // Winter mode button event listener 
   winterModeOpen = true
   eraserModeOPen = false
   rainbowModeOpen = false
   autmnModeOpen = false
 })
 
-autmnMode.addEventListener('click', () => {
+autmnMode.addEventListener('click', () => { // Autmn mode button event listener 
   autmnModeOpen = true
   eraserModeOPen = false
   rainbowModeOpen = false
@@ -79,11 +68,21 @@ slider.addEventListener('mouseup' , () => { // Change grid then update the grid
 
 
 
+// Mouse hold detect 
+document.addEventListener('mouseup', () => { 
+  isDragging = false;
+});
+
+
+document.addEventListener('mousedown', () => {
+  isDragging = true;
+});
+
+// Reflecting grids to page
 function reflectGrid(value) {
   for(let i = 0 ; i < value*value ; i++) {
     const div = document.createElement('div')
     sketch.appendChild(div)
-
 
       div.addEventListener('mousedown', () => {
         if(rainbowModeOpen && !eraserModeOPen) {
@@ -110,16 +109,14 @@ function reflectGrid(value) {
         }
       }
     });
-
-   
+ 
   }
   
-
   sketch.style.gridTemplateColumns = `repeat(${value}, 1fr)`
   sketch.style.gridTemplateRows = `repeat(${value}, 1fr)`
 } 
 
-
+// Random rgb color generate functions
 function randomAutmnRgb() {
   const R = Math.floor(Math.random() * (255 - 128 + 1) + 128);
   const G = Math.floor(Math.random() * 256);
@@ -141,7 +138,7 @@ function randomRgbGenerate() {
   return `rgb(${R}, ${G}, ${B})`
 }
 
-
+// Open or close grid borders
 function borderSwitch() {
   const divs = sketch.querySelectorAll('div')
   divs.forEach(item => {
